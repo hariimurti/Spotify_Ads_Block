@@ -37,7 +37,7 @@ namespace Spotify_Ads_Block
                     List<string> adslist = new List<string>();
                     foreach (string line in File.ReadAllLines(FILE_ADSLIST))
                     {
-                        if (!line.StartsWith("#"))
+                        if (!line.StartsWith("#") && (line != string.Empty))
                             adslist.Add(line);
                     }
                     Hosts.Block(adslist);

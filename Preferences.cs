@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spotify_Ads_Block
 {
@@ -40,7 +37,7 @@ namespace Spotify_Ads_Block
                 List<string> prefs = new List<string>();
                 foreach (string line in File.ReadAllLines(FILE_PREFS))
                 {
-                    if (line.Contains("storage.size="))
+                    if (line.StartsWith("storage.size="))
                     {
                         prefs.Add($"storage.size={size}");
                         isSet = true;
