@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Harimurti;
 
 namespace Spotify_Ads_Block
 {
@@ -18,6 +19,16 @@ namespace Spotify_Ads_Block
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (!AdminPrevilege.isElevated())
+            {
+                groupBox1.Enabled = false;
+                MessageBox.Show("This application needs admin previlege to modify hosts.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             if (Preferences.isExist())
             {
                 textBox1.Text = Preferences.Get_StorageSize();
