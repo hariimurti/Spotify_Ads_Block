@@ -9,11 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Harimurti;
+using System.Net;
 
 namespace Spotify_Ads_Block
 {
     public partial class MainForm : Form
     {
+        private static string GITHUB_ADSLIST = "https://raw.githubusercontent.com/hariimurti/Spotify_Ads_Block/master/hosts.txt";
         private static string FILE_ADSLIST = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "hosts.txt");
 
         public MainForm()
@@ -37,6 +39,18 @@ namespace Spotify_Ads_Block
             {
                 groupBox2.Enabled = false;
             }
+
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    client.DownloadFile(GITHUB_ADSLIST, FILE_ADSLIST);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,7 +68,7 @@ namespace Spotify_Ads_Block
                     Hosts.Block(adslist);
                     MessageBox.Show("Successfully block ads!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -72,7 +86,7 @@ namespace Spotify_Ads_Block
                 Hosts.Reset();
                 MessageBox.Show("Successfully reset hosts!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
