@@ -25,7 +25,7 @@ namespace Spotify_Ads_Block
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            if (!AdminPrevilege.isElevated())
+            if (!AdminPrivilege.isElevated())
             {
                 groupBox1.Enabled = false;
                 MessageBox.Show("This application needs admin previlege to modify hosts.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
