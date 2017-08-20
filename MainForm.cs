@@ -13,7 +13,7 @@ namespace Spotify_Ads_Block
 {
     public partial class MainForm : Form
     {
-        private static string FILE_ADSLIST = "hosts.txt";
+        private static string FILE_ADSLIST = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "hosts.txt");
 
         public MainForm()
         {
